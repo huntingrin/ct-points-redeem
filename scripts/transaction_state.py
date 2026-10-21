@@ -15,7 +15,7 @@ import tempfile
 
 
 PLAN_FIELDS = {
-    "account", "category", "product_id", "product_name", "contents", "quantity",
+    "account", "product_id", "product_name", "contents", "quantity",
     "points", "cash", "validity", "renewal", "authorization_confirmed",
 }
 OBSERVATION_FIELDS = (PLAN_FIELDS - {"authorization_confirmed"}) | {
@@ -98,9 +98,6 @@ def normalize_plan(value, require_authorization=True):
     account = text(value["account"], "account")
     if not re.fullmatch(r"1[3-9]\d\*{4}\d{4}", account):
         raise GuardError("account must use a masked mobile number such as 139****0000.")
-    category = text(value["category"], "category")
-    if category not in {"phonefee", "data", "voice", "media"}:
-        raise GuardError("category must be phonefee, data, voice, or media.")
     if value["renewal"] != "none":
         raise GuardError("This workflow requires verified no automatic renewal.")
     if type(value["authorization_confirmed"]) is not bool:
@@ -115,7 +112,6 @@ def normalize_plan(value, require_authorization=True):
         raise GuardError("Cash top-up is outside this workflow.", "revise_plan")
     return {
         "account": account,
-        "category": category,
         "product_id": text(value["product_id"], "product_id"),
         "product_name": text(value["product_name"], "product_name"),
         "contents": sorted(contents),

@@ -18,9 +18,9 @@ GUARD = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(GUARD)
 
 
-def plan(category="data"):
+def plan():
     return {
-        "account": "139****0000", "category": category, "product_id": "TEST-PRODUCT",
+        "account": "139****0000", "product_id": "TEST-PRODUCT",
         "product_name": "测试权益", "contents": ["测试权益"], "quantity": 1,
         "points": 300, "cash": "0.00", "validity": "测试有效期", "renewal": "none",
         "authorization_confirmed": True,
@@ -53,16 +53,12 @@ class TransactionChecks(unittest.TestCase):
     def read(self):
         return json.loads(self.state.read_text())
 
-    def test_four_categories_can_reserve_only_one_submission(self):
-        for category in ("phonefee", "data", "voice", "media"):
-            with self.subTest(category=category):
-                target = self.state.with_name(category + ".json")
-                selected = plan(category)
-                GUARD.prepare(target, selected)
-                GUARD.arm_submit(target, observed(selected))
-                with self.assertRaises(GUARD.GuardError):
-                    GUARD.arm_submit(target, observed(selected))
-                self.assertEqual(json.loads(target.read_text())["phase"], "submitting")
+    def test_phonefee_plan_can_reserve_only_one_submission(self):
+        GUARD.prepare(self.state, plan())
+        GUARD.arm_submit(self.state, observed())
+        with self.assertRaises(GUARD.GuardError):
+            GUARD.arm_submit(self.state, observed())
+        self.assertEqual(self.read()["phase"], "submitting")
 
     def test_unselected_transaction_cannot_be_prepared(self):
         selected = plan()
@@ -74,7 +70,7 @@ class TransactionChecks(unittest.TestCase):
     def test_every_material_checkout_change_blocks_submission(self):
         GUARD.prepare(self.state, plan())
         changes = {
-            "account": "138****1111", "category": "voice", "product_id": "OTHER",
+            "account": "138****1111", "product_id": "OTHER",
             "product_name": "其他权益", "contents": ["附带另一项业务"], "quantity": 2,
             "points": 301, "cash": "0.01", "validity": "另一有效期", "renewal": "monthly",
         }
@@ -152,7 +148,7 @@ class TransactionChecks(unittest.TestCase):
 
     def test_invalid_money_boolean_points_and_unmasked_account_are_rejected(self):
         changes = [("cash", "NaN"), ("cash", "Infinity"), ("cash", "1e1000"),
-                   ("cash", "-0.01"), ("points", True), ("account", "13900000000"), ("category", [])]
+                   ("cash", "-0.01"), ("points", True), ("account", "13900000000")]
         for field, value in changes:
             with self.subTest(field=field, value=value):
                 selected = plan()
@@ -164,6 +160,10 @@ class TransactionChecks(unittest.TestCase):
     def test_extra_secret_fields_are_not_persisted(self):
         selected = plan()
         selected["password"] = "not-a-real-password"
+        with self.assertRaises(GUARD.GuardError):
+            GUARD.prepare(self.state, selected)
+        selected = plan()
+        selected["category"] = "data"
         with self.assertRaises(GUARD.GuardError):
             GUARD.prepare(self.state, selected)
         GUARD.prepare(self.state, plan())

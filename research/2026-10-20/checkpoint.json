@@ -1,24 +1,25 @@
 {
-  "status": "phonefee_redemption_verified_skill_created",
+  "status": "phonefee_redemption_verified_phonefee_skill_created",
   "date": "2026-10-21",
   "report": "research/2026-10-20/电信权益研究.txt",
   "structured_evidence": "research/2026-10-20/research.json",
   "verification": "2026-10-21 用浙江3星号码173****2062完成一笔真实话费兑换：10元话费直充，1000积分，现金0元；积分1836→836，订单1075097178已完成，用户确认到账。支付短信由本人完成。",
-  "recommendation": "话费最短路径已验证：移动UA + 单次商城登录 + 单次支付验证，共2次短信。下一步用足额积分账号验证流量或影音组合的真实兑换。",
+  "recommendation": "话费直充最短路径已验证：移动UA + 单次商城登录 + 单次支付验证，共2次短信。技能已收敛为只兑话费。",
   "skill_created": true,
   "skill_path": ".",
+  "skill_scope": "phonefee_only",
   "skill_repo": "https://github.com/huntingrin/ct-points-redeem",
   "latest_space_id": 5,
   "browser_control": "finished",
   "latest_report": "trials/live-20261021/实测记录.txt",
   "latest_evidence": "docs/2026-10-21-话费实测.md",
   "latest_verification": "积分1836→836；订单1075097178状态已完成，支付时间2026-10-21 18:56:26；现金0元；4笔重复待支付订单已关闭为已取消。",
-  "next_action": "保持移动UA最短路径。用有足额积分的账号验证一笔流量或影音组合的结算、提交、扣分和到账；不要再用桌面UA打开移动版收银台。",
+  "next_action": "话费直充已跑通并固化为只兑话费的技能。后续只维护话费分支；流量、影音、语音、会员等另立项目，不在本技能扩展。",
   "limitations": [
     "仅一个浙江3星账号完成话费真实兑换，未覆盖多省多套餐",
-    "流量、影音只完成目录/详情/规则读取，未完成本机真实兑换",
-    "语音未发现当前在售商品；金豆、生日礼包、短信直兑未验证",
-    "不同账号目录和面额不同，不能固定商品ID、价格或话费面额"
+    "不同账号、省份和渠道的话费面额不同，不能固定商品ID或面额",
+    "分期返还话费和业务抵用金未验证，本技能默认不办理",
+    "流量、影音、语音、会员、金豆、生日礼包、短信直兑不在本技能范围"
   ],
   "scope": "全国统一入口与动态资格，不以归属省为用户输入前置",
   "user_excluded": [

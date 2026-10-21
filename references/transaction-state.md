@@ -13,7 +13,6 @@
 ```json
 {
   "account": "139****0000",
-  "category": "phonefee",
   "product_id": "本轮官网取得的商品编号",
   "product_name": "10元话费充值",
   "contents": ["10元话费直充，仅本机"],
@@ -26,7 +25,7 @@
 }
 ```
 
-类别使用 `phonefee`、`data`、`voice` 或 `media`。只有确有本笔交易授权时才能设置 `authorization_confirmed: true`。现金必须为 0，积分和数量为正整数；有效期、完整组合及无续订应从当前规则核实。
+本脚本只服务**话费直充**。只有确有本笔交易授权时才能设置 `authorization_confirmed: true`。现金必须为 0，积分和数量为正整数；有效期、完整内容和无续订应从当前页面规则核实。
 
 提交观察 JSON 包含计划中除 `authorization_confirmed` 外的相同字段，并补充：
 
@@ -52,7 +51,7 @@ python3 /absolute/skill/scripts/transaction_state.py --state /absolute/task/tran
 python3 /absolute/skill/scripts/transaction_state.py --state /absolute/task/transaction.json status
 ```
 
-`arm-submit` 会先比对账户、类别、商品 ID/名称、完整内容、数量、积分、现金、有效期与续订，再检查业务数据和验证是否完成；最后原子写入 `submitting`，才返回 `submit_allowed`。它不会点击网页。再次调用不能再次取得提交许可。
+`arm-submit` 会先比对账户、商品 ID/名称、完整内容、数量、积分、现金、有效期与续订，再检查业务数据和验证是否完成；最后原子写入 `submitting`，才返回 `submit_allowed`。它不会点击网页。再次调用不能再次取得提交许可。
 
 如果当前页面已经成功、处理中或结果不明，先 `record` 或只读对账，不能用新文件绕开本笔记录重提。已写 `submitting` 后即使浏览器点击失败也先对账；无订单号且结果不明时记录 `needs_reconcile`。
 
