@@ -36,10 +36,10 @@ await page.cdp("Emulation.setDeviceMetricsOverride", {
 ## 安装
 
 ```sh
-git clone https://github.com/huntingrin/ct-points-redeem.git
+git clone https://github.com/huntingrin/ct-points-redeem.git ~/.codex/skills/ct-points-redeem
 ```
 
-将整个仓库作为 `ct-points-redeem` 文件夹放入宿主的技能目录，例如 Codex 的 `~/.codex/skills/`。也可让具备浏览器能力的 Agent 直接读取 [SKILL.md](SKILL.md)。
+`SKILL.md` 位于仓库根目录，整个仓库就是一个技能文件夹。其他宿主放入对应的技能目录即可，也可让具备浏览器能力的 Agent 直接读取 [SKILL.md](SKILL.md)。
 
 先查询可说：
 
@@ -62,12 +62,12 @@ git clone https://github.com/huntingrin/ct-points-redeem.git
 - 本人在中国电信官方页面完成登录和支付验证；复用有效会话，无需导出 Cookie。
 - 可选的本地提交保护脚本使用 Python 3 标准库，文件锁依赖 macOS/Linux 的 `fcntl`。没有相应执行能力时，由 Agent 按同样规则维护私有断点。
 
-脚本只记录计划、提交断点和核对结果，不控制浏览器、不读取短信、不执行兑换。运行状态保存在仓库外的私有任务目录。用法见 [状态脚本说明](skills/ct-points-redeem/references/transaction-state.md)。
+脚本只记录计划、提交断点和核对结果，不控制浏览器、不读取短信、不执行兑换。运行状态保存在仓库外的私有任务目录。用法见 [状态脚本说明](references/transaction-state.md)。
 
 ## 测试
 
 ```sh
-python3 -m unittest discover -s skills/ct-points-redeem/tests -p 'test_transaction_state.py' -v
+python3 -m unittest discover -s tests -p 'test_transaction_state.py' -v
 ```
 
 测试全部为离线夹具，不访问网站，覆盖：四类商品只能取得一次提交许可、费用/商品变化阻断、验证未完成阻断、已完成订单不被旧观察重开、重复订单号不可替换、费用不符进入对账、敏感字段拒绝写入、文件权限与并发提交保护。
