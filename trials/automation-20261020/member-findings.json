@@ -1,0 +1,73 @@
+{
+  "date": "2026-10-20",
+  "scope": "本人独立登录后的会员权益与记录只读验证",
+  "account_masked": "173****5679",
+  "distinct_from_mall_account": "190****6181",
+  "findings": [
+    {
+      "id": "tv189_monthly",
+      "result": "authenticated_eligibility_gate_verified_catalog_and_claim_unverified",
+      "account_masked": "173****5679",
+      "url": "https://qy.tv189.com/",
+      "steps": [
+        "接回本人独立登录，页头出现脱敏账号",
+        "读取暂无权益及当前不满足条件提示",
+        "关闭提示后点击领取记录，再次触发相同资格提示，未进入记录页"
+      ],
+      "observed": "暂无权益；抱歉,您当前不满足条件,请查询是否已订购该业务,更多详情咨询4008689689.",
+      "rules": "仅已有天翼超高清优享会员话费账单支付用户；月度N选1，领取后当月不可换；当月未领不补；系统核当月扣费，资格及截止时间按省份/地市政策；通常24小时内直充至领取手机号。",
+      "evidence": [
+        "evidence/tv189-independent-authenticated.txt",
+        "evidence/tv189-records-eligibility-gate.txt",
+        "evidence/tv189-authenticated-rules-full.txt"
+      ],
+      "unverified": [
+        "当前未满足条件的确切原因（未订购、扣费或其他资格不能仅据弹窗确定）",
+        "有资格账号的实时权益目录与领取记录字段",
+        "实际领取与第三方到账"
+      ],
+      "note": "这是登录后资格拦截，不能写成登录失败；一个账号不符合不推断全国都不可领。没有为测试新开业务。"
+    },
+    {
+      "id": "cloud_plus",
+      "result": "authenticated_nonmember_and_empty_orders_verified_joint_product_unconfirmed",
+      "account_masked": "173****5679",
+      "url": "https://cloud.189.cn/web/vip",
+      "steps": [
+        "接回本人独立登录",
+        "打开订购记录，读取暂未开通会员、暂无特权和暂无数据",
+        "读取AI铂金与AI黄金页的当前权益介绍",
+        "在已检查的会员页可见内容与链接中未找到云+联合会员、积分兑换入口"
+      ],
+      "observed": {
+        "membership": "暂未开通会员",
+        "orders": "暂无数据",
+        "current_membership_tabs": [
+          "AI铂金会员",
+          "AI黄金会员",
+          "特权介绍",
+          "订购记录"
+        ]
+      },
+      "evidence": [
+        "evidence/cloud-independent-authenticated.txt",
+        "evidence/cloud-authenticated-order-records.txt",
+        "evidence/cloud-authenticated-gold-catalog.txt",
+        "evidence/cloud-authenticated-catalog-terms.json"
+      ],
+      "unverified": [
+        "云+联合会员积分商品当前是否在其他官方渠道供应",
+        "积分兑换、第三方领取与到账"
+      ],
+      "note": "只核会员和订单页面，没有浏览用户云盘文件；帮助文档中的历史/其他渠道介绍不等于当前网页在售，也不能据当前网页推断全渠道已停止。"
+    }
+  ],
+  "actions": {
+    "entered_credentials": false,
+    "requested_sms": false,
+    "submitted_order": false,
+    "claimed": false,
+    "subscribed": false
+  },
+  "outcome": "两站独立登录均成功；超高清资格拦截，云盘未开通会员且空订购记录；无新增领取或订购。"
+}

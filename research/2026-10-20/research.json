@@ -1,0 +1,228 @@
+{
+  "research_date": "2026-10-20",
+  "timezone": "Asia/Shanghai",
+  "status": "research_complete_public_sources_only",
+  "scope": "沿用CUCC：全国入口、按省及号码资格适配；已有权益、零额外现金优先；评估浏览器Agent协作能力",
+  "reference_files": [
+    "/Users/tangguorong/Project/temp/CUCC/research/2026-10-20/联通权益研究.txt",
+    "/Users/tangguorong/Project/temp/CUCC/research/2026-10-20/points-other-uses/积分用途研究.txt",
+    "/Users/tangguorong/Project/temp/CUCC/design/联通积分兑换Skill方案.txt"
+  ],
+  "actions": {
+    "entered_phone_number": false,
+    "requested_sms": false,
+    "logged_into_telecom": false,
+    "claimed_benefits": false,
+    "submitted_redemption": false,
+    "created_skill": false
+  },
+  "sources": [
+    {
+      "id": "official_gd_manual",
+      "url": "https://gd.189.cn/TS/service/manual/index.html",
+      "kind": "official_provincial_guide",
+      "evidence": [
+        "evidence/gd-benefits-snapshot.txt",
+        "evidence/web-filtered-official.json"
+      ],
+      "supports": "积分用途、星级服务、各省各渠道独立选品"
+    },
+    {
+      "id": "official_js_rules",
+      "url": "https://wapjs.189.cn/tysh/pages/integral/index.html",
+      "kind": "official_provincial_rules",
+      "effective_date": "2026-09-01",
+      "evidence": [
+        "evidence/web-official-rules.json",
+        "evidence/js-integral-snapshot.txt"
+      ],
+      "supports": "江苏100分兑1元、6个月兑换资格、积分有效期与活动积分差异；不能外推全国"
+    },
+    {
+      "id": "official_sc_faq",
+      "url": "https://m.sc.189.cn/html-page/equity/equityweb/integral_FAQ.html",
+      "kind": "official_provincial_faq",
+      "evidence": [
+        "evidence/web-official-rules.json"
+      ],
+      "supports": "话费流量和礼品用途；实名、欠费及入网时间条件"
+    },
+    {
+      "id": "official_points_entry",
+      "url": "https://jf.189.cn/",
+      "kind": "official_nationwide_entry",
+      "evidence": [
+        "evidence/points-login-snapshot.txt",
+        "evidence/points-sms-login-snapshot.txt"
+      ],
+      "supports": "本轮实测跳转login.189.cn；密码和短信登录可见，目录未登录不可核"
+    },
+    {
+      "id": "official_linked_gd_mall",
+      "url": "https://gdstar.telefen.com/CommdityList",
+      "kind": "vendor_linked_from_official_gd_guide",
+      "evidence": [
+        "evidence/gdstar-catalog-snapshot.txt"
+      ],
+      "supports": "来源是广东官方指南内jfExchange链接；本轮跳转m.telefen.com手机验证码登录，未读到目录"
+    },
+    {
+      "id": "official_tv189_benefits",
+      "url": "https://qy.tv189.com/receive.html",
+      "kind": "official_product_portal",
+      "evidence": [
+        "evidence/tv189-benefits-snapshot.txt",
+        "evidence/web-member-rules.json"
+      ],
+      "supports": "每月N选1、资格与扣费条件、领取时限；公告与静态目录不一致，不能写死35款"
+    },
+    {
+      "id": "official_cloud_help",
+      "url": "https://cloud.189.cn/web/static/template/help.html",
+      "kind": "official_product_help",
+      "evidence": [
+        "evidence/web-member-rules.json"
+      ],
+      "supports": "部分云+联合会员支持积分兑换；第三方账号领取区别"
+    },
+    {
+      "id": "official_app_description",
+      "url": "https://apps.apple.com/cn/app/id513836029",
+      "kind": "developer_published_app_description",
+      "evidence": [
+        "evidence/web-app-and-signin.json"
+      ],
+      "supports": "生日礼包、签到金豆、连签累签抽话费、1金豆优惠券；券不等于现金"
+    },
+    {
+      "id": "js_signin_legacy_entry",
+      "url": "https://wapjs.189.cn/mall/pages/signinActivity/index.html",
+      "kind": "official_provincial_legacy_entry",
+      "evidence": [
+        "evidence/web-filtered-official.json",
+        "evidence/web-app-and-signin.json"
+      ],
+      "supports": "搜索索引含迁移至中国电信App的公告，仅证明迁移线索；当前动态页面可能不同"
+    },
+    {
+      "id": "official_service_scope",
+      "url": "https://xmtwx.crm.189.cn/complaint_platform/Tymm/toPassLogin?channel=84511001",
+      "kind": "official_service_privacy_description",
+      "evidence": [
+        "evidence/web-candidates.json"
+      ],
+      "supports": "服务场景列有积分兑换语音包、流量包；不证明本机当前有在售SKU"
+    }
+  ],
+  "community_evidence": "evidence/community-findings.json",
+  "candidates": [
+    {
+      "id": "points_to_phonefee",
+      "priority": 1,
+      "benefit": "已有积分兑换本机话费",
+      "verification": "official_use_case_and_login_entry_verified",
+      "unknowns": [
+        "本机归属省",
+        "积分余额及到期",
+        "可售面额",
+        "一次到账或分月返还",
+        "是否仅业务抵用金",
+        "现金补款",
+        "兑换验证及到账"
+      ],
+      "agent_feasibility": "优先登录后只读验证，尚未跑通兑换"
+    },
+    {
+      "id": "points_to_data_voice_and_digital",
+      "priority": 2,
+      "benefit": "积分兑换流量、语音、数字会员及组合商品",
+      "verification": "data_and_digital_officially_documented_voice_only_service_reference_no_current_sku",
+      "unknowns": [
+        "实时SKU与价格",
+        "可兑资格",
+        "有效期与续费",
+        "组合附加业务"
+      ],
+      "agent_feasibility": "目录和结算需登录；不承诺已支持自动兑换"
+    },
+    {
+      "id": "existing_tv189_monthly_benefits",
+      "priority": 3,
+      "benefit": "已有天翼超高清优享会员每月N选1",
+      "verification": "public_rules_and_catalog_verified",
+      "requires": [
+        "已有订购资格",
+        "当月账单支付成功",
+        "按省地市规则"
+      ],
+      "agent_feasibility": "可盘点规则、协助选择；登录和最终领取未验证"
+    },
+    {
+      "id": "points_to_cloud_plus",
+      "priority": 4,
+      "benefit": "天翼云盘云+联合会员",
+      "verification": "official_help_documents_points_for_some_products",
+      "agent_feasibility": "仅规则已核；实时价格、现售和结算待核"
+    },
+    {
+      "id": "app_beans_and_signin",
+      "priority": 5,
+      "benefit": "签到金豆、连签累签抽话费、优惠券",
+      "verification": "developer_description_and_recent_community_sample",
+      "agent_feasibility": "未核独立网页闭环；金豆与天翼积分分开，不能算固定现金收益"
+    },
+    {
+      "id": "birthday_tenure_star",
+      "priority": 6,
+      "benefit": "生日、网龄和星级服务",
+      "verification": "official_description_and_provincial_examples",
+      "agent_feasibility": "适合作资格盘点；金额、流量与领取次数不能全国写死"
+    }
+  ],
+  "sms": {
+    "status": "not_verified_on_user_phone",
+    "query_lead": {
+      "recipient": "10001",
+      "body": "105",
+      "evidence": "近期用户笔记；本轮未获得足以建立全国当前指令表的官方短信细则"
+    },
+    "not_safe_as_query": [
+      "1061",
+      "10611",
+      "JFDH#份数",
+      "DHHF",
+      "DHJF"
+    ],
+    "reason": "不同资料把相同代码解释为查询、兑换菜单或直接扣分，必须按本机官方回执确定流程；未发短信"
+  },
+  "recommendation": "优先研究已有积分兑本机话费；先做登录后只读验证，再决定是否制作Skill",
+  "next_action": "取得电信号码归属省并由本人在官方商城完成登录；Agent只读核对星级、可用及到期积分，搜索话费/流量/语音/视频商品，核对积分、现金、到账方式和续费，到最终提交前结束。",
+  "browser": {
+    "space_id": 40,
+    "name": "Codex:电信权益研究:20261020-ct01",
+    "finish_status": "finished",
+    "kept_pages": []
+  },
+  "community_images": [
+    {
+      "file": "evidence/gd-instalment-rules.jpg",
+      "observation": "广东分期话费规则截图；社区证据，非实时商品核验"
+    },
+    {
+      "file": "evidence/community-points-overview.jpg",
+      "observation": "他人App积分总览，不是本用户账户"
+    },
+    {
+      "file": "evidence/community-benefit-catalog.jpg",
+      "observation": "他人截图列有2990积分流量+视频等组合，未显示成功订单"
+    },
+    {
+      "file": "evidence/community-points-entry.jpg",
+      "observation": "他人App积分入口，不证明其自述78元已到账"
+    },
+    {
+      "file": "evidence/beans-catalog.jpg",
+      "observation": "金豆兑换的优惠券配有券后购买价，不是免费实物"
+    }
+  ]
+}

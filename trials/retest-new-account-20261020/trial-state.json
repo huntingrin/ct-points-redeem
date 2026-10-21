@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-20",
+  "objective": "换另一个手机号重试中国电信积分兑本机话费及流量/影音",
+  "status": "new_account_readonly_retest_complete_zero_points_transactions_unverified",
+  "user_scope": [
+    "points_phonefee",
+    "points_data_digital"
+  ],
+  "user_excluded": [
+    "tv189_monthly",
+    "cloud_plus"
+  ],
+  "scope_note": "保留全国入口与动态资格需求；原账号190****6181仅作旧样本，不混用其余额。未选定具体兑换商品，本轮先核换号后的账户、余额和资格。",
+  "actions": {
+    "agent_entered_phone": false,
+    "agent_requested_sms": false,
+    "submitted_order": false,
+    "redeemed": false,
+    "claimed": false,
+    "scoped_merchant_session_reset": true,
+    "profile_wide_clear": false
+  },
+  "browser": {
+    "spaceId": 43,
+    "name": "Codex:电信积分换号复测:20261020-ct03",
+    "page": "p1",
+    "status": "finished",
+    "finished": true,
+    "kept_pages": []
+  },
+  "previous_evidence": "../automation-20261020/authenticated-findings.json",
+  "next_action": "本轮换号只读复测已完成。下一步需要一个已有足额积分的账号，并明确选定一笔零现金兑换，再补验最终结算/验证、提交、扣分与到账；若该号码在中国电信官方App中显示非0积分，应先核对App与本网页的账号及积分口径。",
+  "account": {
+    "phone_masked": "173****5679",
+    "star": "普通客户/0星",
+    "growth": 599,
+    "tenure_display": "2年+",
+    "available_points": 0,
+    "expiring_this_year": 0,
+    "identity_evidence": [
+      "evidence/new-account-star-identity.txt",
+      "evidence/new-account-mobile-home.txt",
+      "evidence/new-account-mall-balance.txt",
+      "evidence/new-account-phonefee.txt"
+    ]
+  },
+  "account_switch": {
+    "previous_account_masked": "190****6181",
+    "initial_problem": "星级中心已为新号，商城仍复用旧号190****6181，成长值548",
+    "resolved": true,
+    "method": "仅清除https://apps.telefen.com的Cookie和localStorage，以及该页sessionStorage，再经官方星级移动入口自然跳转重新认证，未清理全局Cookie/缓存或xjfw新登录",
+    "evidence": "evidence/mobile-mall-old-session-detected.txt"
+  },
+  "outcome": "已确认积分商城换号为173****5679，星级中心、商城个人中心和话费页一致。新号可用积分0、当年到期0；话费直充及流量/腾讯组合均余额不足。商品目录与旧号不同，话费检索未返回结果；无兑换或订单提交。",
+  "authenticated_evidence": "authenticated-findings.json"
+}

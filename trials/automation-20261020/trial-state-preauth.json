@@ -1,0 +1,233 @@
+{
+  "date": "2026-10-20",
+  "objective": "逐项验证中国电信权益能否用Agent自动化",
+  "user_constraint": "全国通用；不绑定某个省，不收集归属省作为前置条件",
+  "interpretation": "全国统一入口与流程可复用，资格和商品按号码动态读取；不承诺全部号码享相同权益",
+  "status": "awaiting_user_login_for_authenticated_verification",
+  "actions": {
+    "phone_entered": false,
+    "sms_requested": false,
+    "logged_in": false,
+    "redeemed": false,
+    "claimed": false,
+    "third_party_scripts_executed": false,
+    "installed_skill": false
+  },
+  "items": [
+    {
+      "id": "points_phonefee",
+      "label": "积分兑换本机话费",
+      "nationwide_entry": "https://jf.189.cn/",
+      "verdict": "pending_authenticated_flow",
+      "verified": [
+        "全国商城到官方登录的导航",
+        "密码/短信登录方式切换"
+      ],
+      "human_steps": [
+        "本人登录及网站另要求的验证"
+      ],
+      "unknown": [
+        "登录后目录",
+        "面额及资格",
+        "现金0元结算",
+        "最终提交与订单/到账"
+      ],
+      "evidence": [
+        "evidence/points-login-initial.txt",
+        "evidence/points-sms-login.txt"
+      ]
+    },
+    {
+      "id": "points_data_digital",
+      "label": "积分兑换流量、影音组合",
+      "nationwide_entry": "https://jf.189.cn/",
+      "verdict": "pending_authenticated_flow",
+      "verified": [
+        "与全国商城共用登录入口"
+      ],
+      "human_steps": [
+        "本人登录和必要交易验证"
+      ],
+      "unknown": [
+        "当前SKU",
+        "自动续订和附带业务",
+        "号码资格",
+        "零现金与提交/到账"
+      ],
+      "evidence": [
+        "evidence/points-sms-login.txt"
+      ]
+    },
+    {
+      "id": "points_voice",
+      "label": "积分兑换语音",
+      "nationwide_entry": "https://jf.189.cn/",
+      "verdict": "current_sku_unconfirmed",
+      "verified": [
+        "全国商城登录入口可达；此前官方服务描述列有语音兑换场景"
+      ],
+      "human_steps": [
+        "同商城登录验证"
+      ],
+      "unknown": [
+        "全国商城是否当前在售语音包",
+        "后续结算流程"
+      ],
+      "evidence": [
+        "evidence/points-sms-login.txt"
+      ]
+    },
+    {
+      "id": "tv189_monthly",
+      "label": "已有天翼超高清每月N选1",
+      "nationwide_entry": "https://qy.tv189.com/",
+      "verdict": "web_ui_to_auth_verified_claim_pending",
+      "verified": [
+        "旧receive页使用指引通过DOM点击关闭，后续状态确认已关闭",
+        "点击请登录进入当前根首页",
+        "点击登录弹出手机号/图形码/短信码表单",
+        "公开规则和候选可读"
+      ],
+      "human_steps": [
+        "图形码与短信登录",
+        "账号确有资格时方可选择领取"
+      ],
+      "unknown": [
+        "账号资格和当月扣费",
+        "实时个人目录",
+        "最终领取/记录及第三方到账"
+      ],
+      "evidence": [
+        "evidence/tv189-after-close.txt",
+        "evidence/tv189-login-loaded.txt",
+        "evidence/tv189-login-form.txt"
+      ]
+    },
+    {
+      "id": "cloud_plus",
+      "label": "天翼云盘云+联合会员",
+      "nationwide_entry": "https://cloud.189.cn/web/vip",
+      "verdict": "login_ui_verified_product_unconfirmed",
+      "verified": [
+        "会员中心公开页面可读",
+        "点击登录进入iframe登录",
+        "切换账号密码和短信登录表单"
+      ],
+      "human_steps": [
+        "本人登录/扫码或验证"
+      ],
+      "unknown": [
+        "当前云+积分商品是否仍在此渠道供应",
+        "积分价格及结算",
+        "第三方权益领取"
+      ],
+      "evidence": [
+        "evidence/cloud-vip-loaded.txt",
+        "evidence/cloud-account-login.txt",
+        "evidence/cloud-sms-login.txt"
+      ]
+    },
+    {
+      "id": "beans_signin",
+      "label": "签到金豆及金豆兑换",
+      "nationwide_entry": "https://wappark.189.cn/jt-sign/",
+      "verdict": "authenticated_api_lead_no_web_ui_verified",
+      "verified": [
+        "脚本作者源代码包含App登录票据、接口签名及签到调用",
+        "直接访问接口根目录仅返回业务code=401未授权访问"
+      ],
+      "human_steps": [
+        "尚未找到可交接的全国独立网页登录流程"
+      ],
+      "unknown": [
+        "现行官方H5页面",
+        "普通网页登录能否取得App票据",
+        "当前API兼容和真实执行"
+      ],
+      "evidence": [
+        "evidence/ct-tools-telecom-source.txt",
+        "evidence/national-sign-origin.txt"
+      ],
+      "note": "只读作者源码，未运行脚本、未调用签到/抽奖/领奖接口；不能由接口存在推断已跑通"
+    },
+    {
+      "id": "star_tenure",
+      "label": "星级服务及网龄权益",
+      "nationwide_entry": "https://xjfw.189.cn/xjfw/pc/index?xjfwchannel=ZGDXOB",
+      "verdict": "national_web_login_verified_eligibility_pending",
+      "verified": [
+        "旧官方指南星级链接跳转统一xjfw站点",
+        "当前登录表单可读",
+        "静态路由含当前积分、积分兑换记录及多项星级服务",
+        "公开页面代码按provinceId、starLevelReal及省内权限动态判断"
+      ],
+      "human_steps": [
+        "实名认证个人电信手机号本人短信认证",
+        "部分服务本身需线下办理"
+      ],
+      "unknown": [
+        "各账号实际权益和次数",
+        "是否有网龄礼与领取方式",
+        "最终服务申请/领取流程"
+      ],
+      "evidence": [
+        "evidence/national-star-login-loaded.txt",
+        "evidence/national-star-routes.json",
+        "evidence/national-star-eligibility.txt"
+      ],
+      "note": "静态代码证明页面具有适配机制，不证明所有省份/号码资格相同"
+    },
+    {
+      "id": "birthday",
+      "label": "生日礼包",
+      "nationwide_entry": null,
+      "verdict": "no_current_national_web_flow_verified",
+      "verified": [
+        "此前开发者App说明确认存在生日礼包"
+      ],
+      "human_steps": [
+        "当前仅能保留App人工协作线索"
+      ],
+      "unknown": [
+        "统一网页入口",
+        "生日当月资格",
+        "全国规则及领取流程"
+      ],
+      "evidence": [],
+      "note": "没有验证到不等于技术上绝对不能自动化；本轮不标支持"
+    },
+    {
+      "id": "sms",
+      "label": "10001短信查询与兑换",
+      "nationwide_entry": null,
+      "verdict": "no_device_channel_or_universal_code_verified",
+      "verified": [
+        "本会话无可用手机短信读写工具"
+      ],
+      "human_steps": [
+        "本机发送及回执核验"
+      ],
+      "unknown": [
+        "全国现行查询/兑换指令",
+        "本机回执与兑换规则"
+      ],
+      "evidence": [],
+      "note": "不列为无人值守或通用直兑能力"
+    }
+  ],
+  "browser": {
+    "space_id": 41,
+    "name": "Codex:电信权益自动化验证:20261020-ct02",
+    "pages": {
+      "points": "p1",
+      "tv189": "p2",
+      "cloud": "p3",
+      "star_pc": "p4",
+      "star_mobile": "p5"
+    },
+    "status": "handed_off_awaiting_user_login",
+    "handoff_page": "p4"
+  },
+  "next_action": "本人在TaskSpace41的p4完成统一星级服务中心短信登录；确认已登录后，takeOverTaskSpace(41)，先只读核对星级、积分、可领权益及商城跳转，继续逐项验证，不提交领取或兑换。",
+  "outcome": "未登录可验证的页面操作已实测；尚无任何一项完成登录后的兑换/领取闭环"
+}

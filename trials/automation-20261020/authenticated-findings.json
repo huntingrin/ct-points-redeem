@@ -1,0 +1,295 @@
+{
+  "date": "2026-10-20",
+  "status": "authenticated_readonly_verification_complete_transactions_unverified",
+  "scope": "全国入口与动态资格；本轮两个脱敏账号，按站点分别记录，未开展跨省样本验证",
+  "account": {
+    "phone_masked": "190****6181",
+    "star": "普通客户/0星",
+    "growth": 548,
+    "tenure": "1年7个月",
+    "available_points": 0,
+    "expiring_this_year": 0,
+    "points_evidence": "evidence/authenticated-mall-my.txt"
+  },
+  "authorization": "只读验证；未获授权兑换、领取、打卡或新增订购",
+  "actions": {
+    "resumed_space": 41,
+    "authenticated_session_received": true,
+    "agent_entered_credentials": false,
+    "agent_requested_sms": false,
+    "submitted_order": false,
+    "redeemed": false,
+    "claimed": false,
+    "signed_in_activity": false
+  },
+  "verified_paths": [
+    {
+      "id": "star_query",
+      "result": "authenticated_verified",
+      "steps": [
+        "takeOverTaskSpace(41)接回本人登录",
+        "读取星级与成长值",
+        "打开积分倍增详情并识别本号暂不可享"
+      ],
+      "evidence": [
+        "evidence/authenticated-star-home.txt",
+        "evidence/authenticated-star-my-loaded.txt",
+        "evidence/authenticated-add-integral-loaded.txt"
+      ]
+    },
+    {
+      "id": "points_query",
+      "result": "authenticated_verified",
+      "steps": [
+        "官方星级移动网页自动跳转至其引用的apps.telefen.com新星级平台",
+        "会话自然复用进入品质专区、商城和个人中心",
+        "读取可用积分0及本年到期积分0"
+      ],
+      "evidence": [
+        "evidence/authenticated-star-mobile-home.txt",
+        "evidence/authenticated-mobile-catalog.txt",
+        "evidence/authenticated-mall-my.txt"
+      ],
+      "note": "过渡加载时会出现0星、可享0项和空余额占位；仅采用姓名/脱敏号码与业务内容完整加载后的证据"
+    },
+    {
+      "id": "phonefee",
+      "result": "authenticated_rules_and_insufficient_balance_gate_verified",
+      "steps": [
+        "商城搜索框输入话费并点击搜索；Enter未触发搜索",
+        "自动跳转话费兑换专区",
+        "读取本机号、积分余额、面额及积分不足拦截"
+      ],
+      "denominations": [
+        {
+          "yuan": 10,
+          "points": 1000
+        },
+        {
+          "yuan": 20,
+          "points": 2000
+        },
+        {
+          "yuan": 30,
+          "points": 3000
+        },
+        {
+          "yuan": 50,
+          "points": 5000
+        },
+        {
+          "yuan": 100,
+          "points": 10000
+        }
+      ],
+      "cash_supported": false,
+      "rule_window": "当月5日至月底（页面写5-31日）",
+      "evidence": [
+        "evidence/phonefee-authenticated-snapshot.txt",
+        "evidence/phonefee-authenticated-rules-full.txt"
+      ],
+      "unverified": [
+        "足额积分时的下一步验证",
+        "最终提交、扣分及独立到账"
+      ]
+    },
+    {
+      "id": "data",
+      "result": "authenticated_catalog_detail_and_insufficient_balance_gate_verified",
+      "samples": [
+        {
+          "name": "500积分兑换1GB全国通用流量",
+          "points": 500,
+          "detail_verified": true
+        },
+        {
+          "name": "1000积分兑换2GB全国通用流量",
+          "points": 1000,
+          "component_rules_verified": true
+        },
+        {
+          "name": "3000积分兑换6GB全国通用流量",
+          "points": 3000,
+          "list_only": true
+        },
+        {
+          "name": "5000积分兑换10GB全国通用流量",
+          "points": 5000,
+          "list_only": true
+        }
+      ],
+      "rules": {
+        "one_gb": "仅积分兑换；余额不足不能兑换；每月最多5次；通常立即生效当月月底失效、自动退订；套餐迁转等特殊情形可能次月生效；部分套餐不支持；主副卡共享按当前规则"
+      },
+      "evidence": [
+        "evidence/authenticated-search-data.txt",
+        "evidence/authenticated-data-catalog.json",
+        "evidence/authenticated-data-1gb-detail.txt",
+        "evidence/data-1gb-rules.jpg"
+      ],
+      "unverified": [
+        "足额积分结算和商品最终号码资格",
+        "实际提交与到账"
+      ]
+    },
+    {
+      "id": "digital_bundle",
+      "result": "authenticated_search_detail_rules_and_insufficient_balance_gate_verified",
+      "samples": [
+        {
+          "name": "2G流量包+腾讯视频VIP会员季卡",
+          "points": 6400,
+          "detail_verified": true
+        },
+        {
+          "name": "腾讯视频VIP会员季卡",
+          "points": 7800,
+          "list_only": true
+        }
+      ],
+      "rules": "组合含2GB当月流量及腾讯季卡；季卡规则为93天；按手机号与QQ/微信绑定情况到账；不含电视端。不同组成部分有效期不同。",
+      "evidence": [
+        "evidence/authenticated-search-tencent-loaded.txt",
+        "evidence/authenticated-tencent-combo-detail.txt",
+        "evidence/data-component-rules.jpg",
+        "evidence/tencent-quarter-rules.jpg"
+      ],
+      "unverified": [
+        "足额积分结算",
+        "最终提交、积分扣减及第三方到账"
+      ]
+    },
+    {
+      "id": "voice",
+      "result": "not_found_in_current_account_catalog",
+      "steps": [
+        "同一搜索入口检索语音无结果",
+        "以腾讯、流量成功搜索作正向对照"
+      ],
+      "evidence": [
+        "evidence/authenticated-search-voice.txt",
+        "evidence/authenticated-search-tencent-loaded.txt",
+        "evidence/authenticated-search-data.txt"
+      ],
+      "note": "仅限本次账号和渠道，不推断全国无语音积分商品"
+    },
+    {
+      "id": "order_query",
+      "result": "authenticated_empty_list_verified",
+      "steps": [
+        "商城个人中心打开全部订单",
+        "显示订单状态与时间筛选",
+        "当前三个月内暂无订单"
+      ],
+      "evidence": [
+        "evidence/authenticated-order-query.txt"
+      ],
+      "unverified": [
+        "有成功订单时字段读取与实际到账对账"
+      ]
+    },
+    {
+      "id": "tenure_activity",
+      "result": "web_rules_and_account_verified_exclude_default_automated_claim",
+      "url": "https://apps.telefen.com/nstars/iage?activeId=51381",
+      "rules_url": "https://apps.telefen.com/jfh5/nm?pageId=10635",
+      "period": "2026-10-10至2026-10-31",
+      "eligibility": "领取/打卡规则要求中国电信1-7星；签到另要求网龄1年及以上；部分内容有省份、订购资格及名额条件",
+      "sample_eligibility": "本号0星，不满足活动1-7星条件",
+      "reward_note": "部分奖品为积分红包或资格券；签到话费活动结束后20个工作日内发放，不能当立即到账或App金豆",
+      "automation_limit": "当前规则将以脚本等技术手段经非正常途径获取奖品列为违规；默认只做规则/资格/记录查询和本人操作协作，不自动签到领奖",
+      "evidence": [
+        "evidence/authenticated-tenure-page.txt",
+        "evidence/tenure-rules-page.json",
+        "evidence/tenure-october-rules-1.jpg",
+        "evidence/tenure-october-rules-2.jpg",
+        "evidence/tenure-october-rules-3.jpg"
+      ]
+    },
+    {
+      "id": "tv189_monthly",
+      "result": "authenticated_eligibility_gate_verified_catalog_and_claim_unverified",
+      "account_masked": "173****5679",
+      "url": "https://qy.tv189.com/",
+      "steps": [
+        "接回本人独立登录，页头出现脱敏账号",
+        "读取暂无权益及当前不满足条件提示",
+        "关闭提示后点击领取记录，再次触发相同资格提示，未进入记录页"
+      ],
+      "observed": "暂无权益；抱歉,您当前不满足条件,请查询是否已订购该业务,更多详情咨询4008689689.",
+      "rules": "仅已有天翼超高清优享会员话费账单支付用户；月度N选1，领取后当月不可换；当月未领不补；系统核当月扣费，资格及截止时间按省份/地市政策；通常24小时内直充至领取手机号。",
+      "evidence": [
+        "evidence/tv189-independent-authenticated.txt",
+        "evidence/tv189-records-eligibility-gate.txt",
+        "evidence/tv189-authenticated-rules-full.txt"
+      ],
+      "unverified": [
+        "当前未满足条件的确切原因（未订购、扣费或其他资格不能仅据弹窗确定）",
+        "有资格账号的实时权益目录与领取记录字段",
+        "实际领取与第三方到账"
+      ],
+      "note": "这是登录后资格拦截，不能写成登录失败；一个账号不符合不推断全国都不可领。没有为测试新开业务。"
+    },
+    {
+      "id": "cloud_plus",
+      "result": "authenticated_nonmember_and_empty_orders_verified_joint_product_unconfirmed",
+      "account_masked": "173****5679",
+      "url": "https://cloud.189.cn/web/vip",
+      "steps": [
+        "接回本人独立登录",
+        "打开订购记录，读取暂未开通会员、暂无特权和暂无数据",
+        "读取AI铂金与AI黄金页的当前权益介绍",
+        "在已检查的会员页可见内容与链接中未找到云+联合会员、积分兑换入口"
+      ],
+      "observed": {
+        "membership": "暂未开通会员",
+        "orders": "暂无数据",
+        "current_membership_tabs": [
+          "AI铂金会员",
+          "AI黄金会员",
+          "特权介绍",
+          "订购记录"
+        ]
+      },
+      "evidence": [
+        "evidence/cloud-independent-authenticated.txt",
+        "evidence/cloud-authenticated-order-records.txt",
+        "evidence/cloud-authenticated-gold-catalog.txt",
+        "evidence/cloud-authenticated-catalog-terms.json"
+      ],
+      "unverified": [
+        "云+联合会员积分商品当前是否在其他官方渠道供应",
+        "积分兑换、第三方领取与到账"
+      ],
+      "note": "只核会员和订单页面，没有浏览用户云盘文件；帮助文档中的历史/其他渠道介绍不等于当前网页在售，也不能据当前网页推断全渠道已停止。"
+    },
+    {
+      "id": "beans_birthday",
+      "result": "unchanged_unverified",
+      "note": "未找到App金豆或生日礼包在当前全国网页中的已验证闭环；网龄签到不是App金豆签到"
+    }
+  ],
+  "overall": "已验证星级、积分与到期、商品搜索/规则、余额不足拦截、商城空订单；另已验证超高清登录后资格拦截，以及云盘未开通会员和空订购记录。未兑换、领取、打卡或新增订购，交易及到账均未跑通。",
+  "next_action": "本轮查询验证已完成，无待登录交接。下一验证步骤是：在足额既有积分账号上，明确选定一笔零现金兑换后，补验结算验证、最终提交、扣分及到账；当前账号积分为0，不能完成该步骤。实现全国版时采用动态资格/目录读取，并将未验交易及App分支保留为待验证。",
+  "accounts": [
+    {
+      "phone_masked": "190****6181",
+      "sites": [
+        "星级服务",
+        "积分商城"
+      ],
+      "available_points": 0,
+      "star": "普通客户/0星"
+    },
+    {
+      "phone_masked": "173****5679",
+      "sites": [
+        "天翼超高清",
+        "天翼云盘"
+      ],
+      "points_checked": false
+    }
+  ],
+  "account_separation": "原account字段仅属于190****6181；其积分、星级不能用于判断173****5679。",
+  "member_evidence": "member-findings.json"
+}

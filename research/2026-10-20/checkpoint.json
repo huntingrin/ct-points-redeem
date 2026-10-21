@@ -1,0 +1,29 @@
+{
+  "status": "new_account_readonly_retest_complete_zero_points_transactions_unverified",
+  "date": "2026-10-20",
+  "report": "/Users/tangguorong/Project/temp/CT/research/2026-10-20/电信权益研究.txt",
+  "structured_evidence": "/Users/tangguorong/Project/temp/CT/research/2026-10-20/research.json",
+  "verification": "已确认积分商城换号为173****5679，星级中心、商城个人中心和话费页一致。新号可用积分0、当年到期0；话费直充及流量/腾讯组合均余额不足。商品目录与旧号不同，话费检索未返回结果；无兑换或订单提交。",
+  "recommendation": "先验证已有积分兑本机话费，再考虑流量及数字会员；已有套餐权益单独盘点，金豆签到待核网页能力。",
+  "browser_space_id": 43,
+  "browser_space_name": "Codex:电信积分换号复测:20261020-ct03",
+  "browser_finished": true,
+  "kept_pages": [],
+  "next_action": "本轮换号只读复测已完成。下一步需要一个已有足额积分的账号，并明确选定一笔零现金兑换，再补验最终结算/验证、提交、扣分与到账；若该号码在中国电信官方App中显示非0积分，应先核对App与本网页的账号及积分口径。",
+  "limitations": [
+    "换号样本173****5679可用积分0，无法核有积分时的提交和到账",
+    "两账号目录与话费检索行为不同，不能固定旧商品及入口行为",
+    "未做全国各省/套餐的穷尽验证"
+  ],
+  "skill_created": false,
+  "scope": "全国统一入口与动态资格，不以归属省为用户输入前置",
+  "latest_report": "/Users/tangguorong/Project/temp/CT/trials/retest-new-account-20261020/换号复测记录.txt",
+  "latest_evidence": "/Users/tangguorong/Project/temp/CT/trials/retest-new-account-20261020/authenticated-findings.json",
+  "browser_control": "finished",
+  "latest_verification": "已确认积分商城换号为173****5679，星级中心、商城个人中心和话费页一致。新号可用积分0、当年到期0；话费直充及流量/腾讯组合均余额不足。商品目录与旧号不同，话费检索未返回结果；无兑换或订单提交。",
+  "member_evidence": "/Users/tangguorong/Project/temp/CT/trials/automation-20261020/member-findings.json",
+  "user_excluded": [
+    "tv189_monthly",
+    "cloud_plus"
+  ]
+}

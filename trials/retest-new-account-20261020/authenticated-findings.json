@@ -1,0 +1,119 @@
+{
+  "date": "2026-10-20",
+  "status": "new_account_readonly_retest_complete_zero_points_transactions_unverified",
+  "scope": [
+    "points_phonefee",
+    "points_data_digital"
+  ],
+  "user_excluded": [
+    "tv189_monthly",
+    "cloud_plus"
+  ],
+  "account": {
+    "phone_masked": "173****5679",
+    "star": "普通客户/0星",
+    "growth": 599,
+    "tenure_display": "2年+",
+    "available_points": 0,
+    "expiring_this_year": 0,
+    "identity_evidence": [
+      "evidence/new-account-star-identity.txt",
+      "evidence/new-account-mobile-home.txt",
+      "evidence/new-account-mall-balance.txt",
+      "evidence/new-account-phonefee.txt"
+    ]
+  },
+  "account_switch": {
+    "previous_account_masked": "190****6181",
+    "initial_problem": "星级中心已为新号，商城仍复用旧号190****6181，成长值548",
+    "resolved": true,
+    "method": "仅清除https://apps.telefen.com的Cookie和localStorage，以及该页sessionStorage，再经官方星级移动入口自然跳转重新认证，未清理全局Cookie/缓存或xjfw新登录",
+    "evidence": "evidence/mobile-mall-old-session-detected.txt"
+  },
+  "actions": {
+    "agent_entered_phone": false,
+    "agent_requested_sms": false,
+    "submitted_order": false,
+    "redeemed": false,
+    "claimed": false,
+    "scoped_merchant_session_reset": true,
+    "profile_wide_clear": false
+  },
+  "findings": [
+    {
+      "id": "phonefee",
+      "verdict": "direct_page_identity_and_zero_balance_gate_verified_search_empty",
+      "direct_url": "https://apps.telefen.com/jycalls/?channelCode=HGOKHD",
+      "observed": "页头与充值号码均173****5679；可用积分0；当前直达页显示100元/10000积分；抱歉，积分不足，暂不能兑换",
+      "search_result": "从本轮已观察的商城搜索URL按话费关键词检索，显示没有找到哎，未自动跳转话费专区",
+      "limits": [
+        "直达页不等于已证明当前个人目录支持完整交易",
+        "不据本页唯一选项断言全国或本号永久只有100元面额",
+        "未验证足额积分后的结算、验证、扣分与到账"
+      ],
+      "evidence": [
+        "evidence/new-account-phonefee.txt",
+        "evidence/new-account-phonefee-rules.txt",
+        "evidence/new-account-phonefee-search-empty.txt"
+      ]
+    },
+    {
+      "id": "data",
+      "verdict": "current_catalog_detail_and_zero_balance_gate_verified",
+      "samples": [
+        {
+          "name": "1000积分兑换-2GB国内流量（集团商城）",
+          "points": 1000,
+          "detail_verified": true
+        },
+        {
+          "name": "2000积分兑换-5GB国内流量（集团商城）",
+          "points": 2000,
+          "list_only": true
+        }
+      ],
+      "rules": "2GB详情文字：当月有效、订购立即生效、限订购号码、直接扣减有效积分且不退不换；完整介绍见证据。",
+      "balance_gate": "您的积分余额不足，无法兑换!",
+      "evidence": [
+        "evidence/new-account-data-search.txt",
+        "evidence/new-account-data-catalog.json",
+        "evidence/new-account-data-2gb-detail.txt",
+        "evidence/new-account-data-2gb-rules.txt"
+      ],
+      "limits": [
+        "未点击立即兑换，未生成结算或订单",
+        "实付款空白不能视为已核现金实付0"
+      ]
+    },
+    {
+      "id": "digital_bundle",
+      "verdict": "current_catalog_detail_components_and_zero_balance_gate_verified",
+      "sample": {
+        "name": "5G流量包+腾讯视频VIP会员季卡",
+        "points": 7400,
+        "detail_verified": true,
+        "components": [
+          "2000积分兑换-5GB国内流量（集团商城）",
+          "腾讯视频VIP会员季卡"
+        ]
+      },
+      "rules": "当前详情中的流量组成写5GB，当月有效；不把流量有效期与腾讯季卡有效期混用。",
+      "balance_gate": "您的积分余额不足，无法兑换!",
+      "evidence": [
+        "evidence/new-account-tencent-combo-detail.txt",
+        "evidence/new-account-tencent-combo-text.txt"
+      ],
+      "limits": [
+        "未验证领取、第三方到账或有积分时的结算"
+      ]
+    }
+  ],
+  "nationwide_implication": "两账号的目录和话费入口行为不同；全国版应动态读取身份、余额、目录、价格及资格，并在跨站SSO后核对账号一致，不能写死旧样本商品或面额。两个账号样本不代表全国适用性已穷尽验证。",
+  "operational_notes": [
+    "商城首页弹出的广告遮挡搜索入口，已通过其正常close-area按钮关闭，未绕过验证",
+    "等数字余额及身份完整加载后取值，不采用空余额或0项占位",
+    "新流量详情不足提示为积分余额不足，旧等待条件积分不足不能覆盖所有页面，应识别业务语义"
+  ],
+  "outcome": "已确认积分商城换号为173****5679，星级中心、商城个人中心和话费页一致。新号可用积分0、当年到期0；话费直充及流量/腾讯组合均余额不足。商品目录与旧号不同，话费检索未返回结果；无兑换或订单提交。",
+  "next_action": "本轮换号只读复测已完成。下一步需要一个已有足额积分的账号，并明确选定一笔零现金兑换，再补验最终结算/验证、提交、扣分与到账；若该号码在中国电信官方App中显示非0积分，应先核对App与本网页的账号及积分口径。"
+}

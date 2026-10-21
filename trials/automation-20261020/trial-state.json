@@ -1,0 +1,299 @@
+{
+  "date": "2026-10-20",
+  "objective": "逐项验证中国电信权益能否用Agent自动化",
+  "user_constraint": "全国通用；不绑定某个省，不收集归属省作为前置条件",
+  "interpretation": "全国统一入口与流程可复用，资格和商品按号码动态读取；不承诺全部号码享相同权益",
+  "status": "authenticated_readonly_verification_complete_transactions_unverified",
+  "actions": {
+    "phone_entered": false,
+    "sms_requested": false,
+    "logged_in": true,
+    "redeemed": false,
+    "claimed": false,
+    "third_party_scripts_executed": false,
+    "installed_skill": false,
+    "logged_in_by": "user",
+    "submitted_order": false,
+    "signed_in_activity": false
+  },
+  "items": [
+    {
+      "id": "points_phonefee",
+      "label": "积分兑换本机话费",
+      "nationwide_entry": "https://jf.189.cn/",
+      "verdict": "authenticated_rules_and_insufficient_balance_gate_verified",
+      "verified": [
+        "商城搜索框输入话费并点击搜索；Enter未触发搜索",
+        "自动跳转话费兑换专区",
+        "读取本机号、积分余额、面额及积分不足拦截"
+      ],
+      "human_steps": [
+        "本人登录及网站另要求的验证"
+      ],
+      "unknown": [
+        "足额积分时的下一步验证",
+        "最终提交、扣分及独立到账"
+      ],
+      "evidence": [
+        "evidence/phonefee-authenticated-snapshot.txt",
+        "evidence/phonefee-authenticated-rules-full.txt"
+      ]
+    },
+    {
+      "id": "points_data_digital",
+      "label": "积分兑换流量、影音组合",
+      "nationwide_entry": "https://jf.189.cn/",
+      "verdict": "authenticated_search_detail_rules_and_insufficient_balance_gate_verified",
+      "verified": [
+        "官方星级页面自然复用会话进入现行商城",
+        "流量与腾讯搜索、1GB及腾讯组合详情和组成规则可读",
+        "当前账号积分0，商品页积分不足拦截"
+      ],
+      "human_steps": [
+        "本人登录和必要交易验证"
+      ],
+      "unknown": [
+        "足额积分结算",
+        "最终提交、积分扣减及第三方到账"
+      ],
+      "evidence": [
+        "evidence/authenticated-search-tencent-loaded.txt",
+        "evidence/authenticated-tencent-combo-detail.txt",
+        "evidence/data-component-rules.jpg",
+        "evidence/tencent-quarter-rules.jpg"
+      ]
+    },
+    {
+      "id": "points_voice",
+      "label": "积分兑换语音",
+      "nationwide_entry": "https://jf.189.cn/",
+      "verdict": "not_found_in_current_account_catalog",
+      "verified": [
+        "同一搜索入口检索语音无结果",
+        "以腾讯、流量成功搜索作正向对照"
+      ],
+      "human_steps": [
+        "同商城登录验证"
+      ],
+      "unknown": [
+        "全国商城是否当前在售语音包",
+        "后续结算流程"
+      ],
+      "evidence": [
+        "evidence/authenticated-search-voice.txt",
+        "evidence/authenticated-search-tencent-loaded.txt",
+        "evidence/authenticated-search-data.txt"
+      ]
+    },
+    {
+      "id": "tv189_monthly",
+      "label": "已有天翼超高清每月N选1",
+      "nationwide_entry": "https://qy.tv189.com/",
+      "verdict": "authenticated_eligibility_gate_verified_catalog_and_claim_unverified",
+      "verified": [
+        "接回本人独立登录，页头出现脱敏账号",
+        "读取暂无权益及当前不满足条件提示",
+        "关闭提示后点击领取记录，再次触发相同资格提示，未进入记录页"
+      ],
+      "human_steps": [
+        "首次/过期认证由本人完成（本轮已完成）；有实际资格才可进一步选择领取"
+      ],
+      "unknown": [
+        "当前未满足条件的确切原因（未订购、扣费或其他资格不能仅据弹窗确定）",
+        "有资格账号的实时权益目录与领取记录字段",
+        "实际领取与第三方到账"
+      ],
+      "evidence": [
+        "evidence/tv189-independent-authenticated.txt",
+        "evidence/tv189-records-eligibility-gate.txt",
+        "evidence/tv189-authenticated-rules-full.txt"
+      ],
+      "note": "这是登录后资格拦截，不能写成登录失败；一个账号不符合不推断全国都不可领。没有为测试新开业务。",
+      "account_masked": "173****5679",
+      "observed": "暂无权益；抱歉,您当前不满足条件,请查询是否已订购该业务,更多详情咨询4008689689."
+    },
+    {
+      "id": "cloud_plus",
+      "label": "天翼云盘云+联合会员",
+      "nationwide_entry": "https://cloud.189.cn/web/vip",
+      "verdict": "authenticated_nonmember_and_empty_orders_verified_joint_product_unconfirmed",
+      "verified": [
+        "接回本人独立登录",
+        "打开订购记录，读取暂未开通会员、暂无特权和暂无数据",
+        "读取AI铂金与AI黄金页的当前权益介绍",
+        "在已检查的会员页可见内容与链接中未找到云+联合会员、积分兑换入口"
+      ],
+      "human_steps": [
+        "首次/过期认证由本人完成（本轮已完成）"
+      ],
+      "unknown": [
+        "云+联合会员积分商品当前是否在其他官方渠道供应",
+        "积分兑换、第三方领取与到账"
+      ],
+      "evidence": [
+        "evidence/cloud-independent-authenticated.txt",
+        "evidence/cloud-authenticated-order-records.txt",
+        "evidence/cloud-authenticated-gold-catalog.txt",
+        "evidence/cloud-authenticated-catalog-terms.json"
+      ],
+      "note": "只核会员和订单页面，没有浏览用户云盘文件；帮助文档中的历史/其他渠道介绍不等于当前网页在售，也不能据当前网页推断全渠道已停止。",
+      "account_masked": "173****5679",
+      "observed": {
+        "membership": "暂未开通会员",
+        "orders": "暂无数据",
+        "current_membership_tabs": [
+          "AI铂金会员",
+          "AI黄金会员",
+          "特权介绍",
+          "订购记录"
+        ]
+      }
+    },
+    {
+      "id": "beans_signin",
+      "label": "签到金豆及金豆兑换",
+      "nationwide_entry": "https://wappark.189.cn/jt-sign/",
+      "verdict": "authenticated_api_lead_no_web_ui_verified",
+      "verified": [
+        "脚本作者源代码包含App登录票据、接口签名及签到调用",
+        "直接访问接口根目录仅返回业务code=401未授权访问"
+      ],
+      "human_steps": [
+        "尚未找到可交接的全国独立网页登录流程"
+      ],
+      "unknown": [
+        "现行官方H5页面",
+        "普通网页登录能否取得App票据",
+        "当前API兼容和真实执行"
+      ],
+      "evidence": [
+        "evidence/ct-tools-telecom-source.txt",
+        "evidence/national-sign-origin.txt"
+      ],
+      "note": "只读作者源码，未运行脚本、未调用签到/抽奖/领奖接口；不能由接口存在推断已跑通"
+    },
+    {
+      "id": "star_tenure",
+      "label": "星级服务及网龄权益",
+      "nationwide_entry": "https://xjfw.189.cn/xjfw/pc/index?xjfwchannel=ZGDXOB",
+      "verdict": "authenticated_verified",
+      "verified": [
+        "takeOverTaskSpace(41)接回本人登录",
+        "读取星级与成长值",
+        "打开积分倍增详情并识别本号暂不可享",
+        "移动网页进入现行商城、网龄活动规则可读，另见tenure_activity"
+      ],
+      "human_steps": [
+        "实名认证个人电信手机号本人短信认证",
+        "部分服务本身需线下办理"
+      ],
+      "unknown": [
+        "其他账号的实际权益与次数",
+        "最终服务申请/领取流程"
+      ],
+      "evidence": [
+        "evidence/authenticated-star-home.txt",
+        "evidence/authenticated-star-my-loaded.txt",
+        "evidence/authenticated-add-integral-loaded.txt"
+      ],
+      "note": "静态代码证明页面具有适配机制，不证明所有省份/号码资格相同"
+    },
+    {
+      "id": "birthday",
+      "label": "生日礼包",
+      "nationwide_entry": null,
+      "verdict": "no_current_national_web_flow_verified",
+      "verified": [
+        "此前开发者App说明确认存在生日礼包"
+      ],
+      "human_steps": [
+        "当前仅能保留App人工协作线索"
+      ],
+      "unknown": [
+        "统一网页入口",
+        "生日当月资格",
+        "全国规则及领取流程"
+      ],
+      "evidence": [],
+      "note": "没有验证到不等于技术上绝对不能自动化；本轮不标支持"
+    },
+    {
+      "id": "sms",
+      "label": "10001短信查询与兑换",
+      "nationwide_entry": null,
+      "verdict": "no_device_channel_or_universal_code_verified",
+      "verified": [
+        "本会话无可用手机短信读写工具"
+      ],
+      "human_steps": [
+        "本机发送及回执核验"
+      ],
+      "unknown": [
+        "全国现行查询/兑换指令",
+        "本机回执与兑换规则"
+      ],
+      "evidence": [],
+      "note": "不列为无人值守或通用直兑能力"
+    },
+    {
+      "id": "tenure_activity",
+      "label": "网页网龄活动与签到",
+      "verdict": "web_rules_and_account_verified_exclude_default_automated_claim",
+      "evidence": [
+        "evidence/authenticated-tenure-page.txt",
+        "evidence/tenure-rules-page.json",
+        "evidence/tenure-october-rules-1.jpg",
+        "evidence/tenure-october-rules-2.jpg",
+        "evidence/tenure-october-rules-3.jpg"
+      ],
+      "qualification": "本号0星，不满足活动1-7星条件",
+      "automation_limit": "当前规则将以脚本等技术手段经非正常途径获取奖品列为违规；默认只做规则/资格/记录查询和本人操作协作，不自动签到领奖"
+    }
+  ],
+  "browser": {
+    "space_id": 41,
+    "name": "Codex:电信权益自动化验证:20261020-ct02",
+    "pages": {
+      "mall_orders": "p1",
+      "tv189_eligibility": "p2",
+      "cloud_membership": "p3",
+      "data_detail": "p4"
+    },
+    "status": "finished",
+    "finished": true,
+    "kept_pages": []
+  },
+  "next_action": "本轮查询验证已完成，无待登录交接。下一验证步骤是：在足额既有积分账号上，明确选定一笔零现金兑换后，补验结算验证、最终提交、扣分及到账；当前账号积分为0，不能完成该步骤。实现全国版时采用动态资格/目录读取，并将未验交易及App分支保留为待验证。",
+  "outcome": "已验证星级、积分与到期、商品搜索/规则、余额不足拦截、商城空订单；另已验证超高清登录后资格拦截，以及云盘未开通会员和空订购记录。未兑换、领取、打卡或新增订购，交易及到账均未跑通。",
+  "account": {
+    "phone_masked": "190****6181",
+    "star": "普通客户/0星",
+    "growth": 548,
+    "tenure": "1年7个月",
+    "available_points": 0,
+    "expiring_this_year": 0,
+    "points_evidence": "evidence/authenticated-mall-my.txt"
+  },
+  "authenticated_evidence": "authenticated-findings.json",
+  "accounts": [
+    {
+      "phone_masked": "190****6181",
+      "sites": [
+        "星级服务",
+        "积分商城"
+      ],
+      "available_points": 0,
+      "star": "普通客户/0星"
+    },
+    {
+      "phone_masked": "173****5679",
+      "sites": [
+        "天翼超高清",
+        "天翼云盘"
+      ],
+      "points_checked": false
+    }
+  ],
+  "account_separation": "原account字段仅属于190****6181；其积分、星级不能用于判断173****5679。",
+  "member_evidence": "member-findings.json"
+}
